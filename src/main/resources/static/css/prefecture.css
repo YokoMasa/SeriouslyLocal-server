@@ -1,0 +1,137 @@
+/* prefecture */
+.pf-hero {
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.pf-hero-img {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.pf-heroOverlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 350px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+}
+
+.pf-hero-prefname {
+    font-size: 40pt;
+    margin: 20px 0;
+}
+
+.pf-select {
+    width: 150px;
+    border: 1px solid #ccc;
+    padding: 2px;
+}
+
+.pf-select-label {
+    display: inline-block;
+    margin-right: 10px;
+    font-size: 12pt;
+}
+
+.pf-loading {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 400px;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    z-index: 5;
+    transition: all 0.2s;
+}
+ 
+.pf-articleList {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 250px;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.pf-article {
+    overflow: hidden;
+    position: relative;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.pf-article:hover {
+    opacity: 0.8;
+}
+
+.pf-article-img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.pf-article-title {
+    font-weight: 700;
+    font-size: 14pt;
+}
+
+.pf-article-description {
+    font-size: 11pt;
+}
+
+.pf-article-descriptionOverlay {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    z-index: 5;
+    background: linear-gradient(to top, white, rgba(255, 255, 255, 0))
+}
+
+@media(max-width: 600px) {
+    .pf-hero {
+        position: relative;
+        left: -10px;
+        margin-top: 0;
+        width: 100vw;
+    }
+
+    .pf-hero-prefname {
+        font-size: 25pt;
+        margin: 7px 0;
+    }
+
+    .pf-hero-img {
+        height: 250px;
+    }
+    
+    .pf-heroOverlay {
+        height: 250px;
+        padding: 10px;
+    }
+
+    .pf-articleList {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .pf-article-img {
+        height: 250px;
+    }
+}
+
+@media(max-width: 400px) {
+    .pf-article-img {
+        height: 200px;
+    }
+}

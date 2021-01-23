@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html th:replace="base_template::root (~{::title}, ~{::#content}, _, ~{::meta})">
+    <head>
+        <title th:text="${'Category: ' + category.name}">articles</title>
+        <meta th:fragment="meta" name="description" th:content="${'Index page of category: ' + category.name}" />
+        <meta th:fragment="meta" property="og:url" th:content="@{http://localhost:8080/place_article/category/{name}(name=${category.name})}" />
+        <meta th:fragment="meta" property="og:type" content="website" />
+        <meta th:fragment="meta" property="og:title" content="index" />
+        <meta th:fragment="meta" property="og:description" th:content="${'Index page of category: ' + category.name}" />
+        <meta th:fragment="meta" property="og:site_name" content="Seriously Local Japan" />            
+    </head>
+    <body>
+        <div id="content">
+            <h1>Category: <span th:text="${category.name}"></span></h1>
+            <div class="articleList widthFill">
+                <a th:each="article: ${articles}" th:href="@{/place_article/{id}(id=${article.id})}" class="widthFill flexRowAlignLeft articleList-el">
+                    <img th:src="${article.thumbnail.thumbnailUrl}" class="roundBorder articleList-el-image"/>
+
+                    <div class="heightFill" style="position: relative;">
+                        <h2 th:text="${article.title}" class="articleList-el-title"></h2>
+
+                        <div class="articleList-el-metadata">
+                            <span class="material-icons md-9">room</span>
+                            <span th:text="${article.prefecture}"></span>
+                            &nbsp;
+                            <span class="material-icons md-9">update</span>
+                            <span th:text="${#calendars.format(article.updatedAt, 'dd MMMM yyyy')}"></span>
+                        </div>
+
+                        <div class="articleList-el-shortDescription" th:text="${article.shortDescription}">
+                        </div>
+
+                        <div style="position: absolute; bottom: 0; height: 30px; width: 100%; background: linear-gradient(to top, white, rgba(255, 255, 255, 0));"></div>
+
+                    </div>
+
+                </a>
+            </div>
+        </div>
+    </body>
+</html>

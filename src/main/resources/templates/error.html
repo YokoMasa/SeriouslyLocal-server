@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html th:replace="base_template::root (~{::title}, ~{::#content}, _, _)">
+    <head>
+        <title>Error</title>
+    </head>
+
+    <body>
+        <div id="content">
+            <div>
+                status: &nbsp;<span th:text="${status}"></span>
+            </div>
+            <div>
+                path: &nbsp;<span th:text="${path}"></span>
+            </div>
+            <div>
+                exception: &nbsp;<span th:text="${exception}"></span>
+            </div>
+        </div>
+    </body>
+</html>

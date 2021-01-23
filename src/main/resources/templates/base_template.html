@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:fragment="root (title, content, breadCrumbs, meta)">
+    <head>
+        <title th:replace="${title}"></title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="stylesheet" href="/css/base.css"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+        <meta th:replace="${meta}">
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script th:if="${#arrays.contains(@environment.getActiveProfiles(),'prod')}" async src="https://www.googletagmanager.com/gtag/js?id=G-E6QYL2V6YM"></script>
+        <script th:if="${#arrays.contains(@environment.getActiveProfiles(),'prod')}">
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-E6QYL2V6YM');
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="content hightFill flexRowAlignLeft">
+                <a href="/place_article" style="padding-top: 10px;">
+                    <img src="/logo2.png" class="header-logo"/>
+                </a>
+            </div>
+        </header>
+        <div class="content">
+            <div th:replace="${breadCrumbs}"></div>
+        </div>
+        <section class="content">
+            <div th:replace="${content}"></div>
+        </section>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html th:replace="base_template::root (~{::title}, ~{::#content}, ~{::#breadCrumbs}, ~{::meta})">
+    <head>
+        <title th:text="${article.title} + ' | Seriously Local Japan'">article</title>
+        <meta th:fragment="meta" name="description" th:content="${article.shortDescription}"/>
+        <meta th:fragment="meta" property="og:url" th:content="@{https://seriously-local.com/place_article/{id}(id=${article.id})}" />
+        <meta th:fragment="meta" property="og:type" content="article" />
+        <meta th:fragment="meta" property="og:title" th:content="${article.title}" />
+        <meta th:fragment="meta" property="og:description" th:content="${article.shortDescription}" />
+        <meta th:fragment="meta" property="og:site_name" content="Seriously Local Japan" />            
+        <meta th:fragment="meta" property="og:image" th:content="${article.thumbnail.originalImageUrl}" />
+    </head>
+    <body>
+
+        <div id="breadCrumbs">
+            <a href="/place_article">home</a>
+            <span>&gt;</span>
+            <a th:href="@{/prefecture/{name}(name=${article.prefecture})}" th:text="${article.prefecture}"></a>
+            <span>&gt;</span>
+            <a th:href="@{/prefecture/{name}(name=${article.prefecture}, category=${article.category.id})}" th:text="${article.category.name}"></a>
+        </div>
+
+        <div id="content">
+            <div th:if="${preview == true}" style="position: fixed; top: 0; left: 0; background: #0086c3; width: 100vw; height: 25px; color: white; font-size: 11pt; text-align: center;">
+                This is a preview
+            </div>
+
+            <div class="articleWrapper">
+                <div class="article flexGrow">
+
+                    <img th:src="${article.thumbnail.originalImageUrl}" style="width: 100%;"/>
+                    <span th:utext="${thumbnailCredit}"></span>
+
+                    <div class="article-title">
+                        <h1 th:text="${article.title}">title</h1>
+                        <span>last update &nbsp;</span>
+                        <span th:text="${#calendars.format(article.updatedAt, 'dd MMMM yyyy')}"></span>
+                    </div>
+
+                    <div th:utext="${article.content}">
+                        content
+                    </div>
+                </div>
+                
+                <div class="article-sideBar">
+
+                    <div class="article-sideBar-group">
+                        <div class="article-sideBar-heading roundBorder">Recent articles</div>
+                            <a th:each="recentArticle: ${recentArticles}" th:href="@{/place_article/{id}(id=${recentArticle.id})}" class="article-sideBar-el flexRowAlignLeft">
+                                <img th:src="${recentArticle.thumbnail.thumbnailUrl}" class="article-sideBar-el-image roundBorder">
+                                <span th:text="${recentArticle.title}" class="article-sideBar-el-title heightFill"></span>
+                            </a>
+                    </div>
+
+                    <div class="article-sideBar-group">
+                        <div class="article-sideBar-heading roundBorder">Prefectures</div>
+                        <div>
+                            <a href="/prefecture/Tokyo" class="article-sideBar-el flexRowAlignLeft">
+                                <span>Tokyo</span>
+                            </a>
+                            <a href="/prefecture/Chiba" class="article-sideBar-el flexRowAlignLeft">
+                                <span>Chiba</span>
+                            </a>
+                            <a href="/prefecture/Kanagawa" class="article-sideBar-el flexRowAlignLeft">
+                                <span>Kanagawa</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="article-sideBar-group">
+                        <div class="article-sideBar-heading roundBorder">Categories</div>
+                        <div th:each="category: ${categories}">
+                            <a th:href="@{/place_article/category/{category}(category=${category.name})}" class="article-sideBar-el flexRowAlignLeft">
+                                <span th:text="${category.name}" class="article-sideBar-el-title heightFill"></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

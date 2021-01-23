@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html th:replace="base_template::root (~{::title}, ~{::#content}, _, ~{::meta})">
+    <head>
+        <title th:text="'Places to go in ' + ${prefectureInfo.name} + ' | Seriously Local Japan'"></title>
+
+        <!-- TODO: write meta correctly -->
+        <meta th:fragment="meta" name="description" th:content="${'Local travel destination in ' + prefectureInfo.name + ', Japan'}"/>
+        <meta th:fragment="meta" property="og:url" th:content="${'https://seriously-local.com/prefecture/' + prefectureInfo.name}" />
+        <meta th:fragment="meta" property="og:type" content="website" />
+        <meta th:fragment="meta" property="og:title" th:content="'Places to go in ' + ${prefectureInfo.name}" />
+        <meta th:fragment="meta" property="og:description" th:content="${'Local travel destination in ' + prefectureInfo.name + ', Japan'}"/>
+        <meta th:fragment="meta" property="og:site_name" content="Seriously Local Japan" /> 
+        <meta th:fragment="meta" property="og:image" th:content="${prefectureInfo.hero.thumbnailUrl}" />
+        <link th:fragment="meta" rel="stylesheet" href="/css/prefecture.css"/>   
+    </head>
+    <body>
+        <div id="content" style="position: relative;">
+
+            <div class="pf-hero">
+                <img class="pf-hero-img" th:src="${prefectureInfo.hero.originalImageUrl}">
+                <div class="pf-heroOverlay flexColGravityBottom">
+                    <h1 class="pf-hero-prefname" th:text="${prefectureInfo.name}"></h1>
+                    <span th:text="${prefectureInfo.description}"></span>
+                </div>
+            </div>
+
+            <div id="v" style="position: relative;">
+
+                <div class="flexRowAlignLeft">
+                    <span class="pf-select-label">Category:</span>
+                    <select class="pf-select" v-model="category" @change="onCategoryChange">
+                        <option value="-1">All</option>
+                        <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
+                    </select>
+                </div>
+
+                <div v-if="noArticle()">Currently there are no article about this category</div>
+
+                <div style="position: relative;">
+                    <transition name="fade">
+                        <div v-if="!loaded" class="pf-loading">
+                            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                        </div>
+                    </transition>
+
+                    <transition name="fade">
+                        <div v-if="loaded" class="pf-articleList">
+                            <a class="pf-article" v-for="article in articles" :href="'/place_article/' + article.id">
+                                <img class="pf-article-img" :src="article.thumbnail.originalImageUrl">
+                                <div class="pf-article-title">{{ article.title }}</div>
+                                <span class="pf-article-description">
+                                    {{ article.shortDescription }}
+                                </span>
+                                <div class="pf-article-descriptionOverlay"></div>
+                            </a>
+                        </div>
+                    </transition>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+            <script th:inline="javascript">
+                window.onload = function() {
+
+                    var prefecture = /*[[${prefectureInfo.name}]]*/ "Tokyo";
+                    var params = new URLSearchParams(new URL(window.location).search);
+                    var initialCategoryId = -1;
+                    if (params.get("category")) {
+                        initialCategoryId = parseInt(params.get("category"));
+                    }
+
+                    var vue = new Vue({
+                        el: "#v",
+                        created: function() {
+                            var self = this;
+                            axios.get("/api/category")
+                                .then(function(res) {
+                                    self.categories = res.data;
+                                }).catch(function(error) {
+                                    alert("error occurred");
+                                });
+                            this.reloadArticles();
+                        },
+                        data: {
+                            category: initialCategoryId,
+                            categories: [],
+                            articles: [],
+                            loaded: false
+                        },
+                        methods: {
+                            onCategoryChange: function() {
+                                this.loaded = false;
+                                this.reloadArticles();
+                            },
+                            reloadArticles: function() {
+                                var url = "/api/place_article?prefecture=" + prefecture;
+                                if (this.category !== -1) {
+                                    url += "&category=" + this.category;
+                                }
+                                var self = this;
+                                axios.get(url)
+                                    .then(function(res) {
+                                        self.articles = res.data;
+                                        self.loaded = true;
+                                    }).catch(function(error) {
+                                        alert("error occurred");
+                                        self.loaded = true;
+                                    });
+                            },
+                            noArticle() {
+                                return this.loaded && this.articles.length === 0;
+                            }
+                        }
+                    });
+                }
+            </script>
+        </div>
+    </body>
+</html>
