@@ -18,20 +18,77 @@
 
             gtag('config', 'G-E6QYL2V6YM');
         </script>
+        <script>
+            window.addEventListener("load", function() {
+                var hamburger = document.getElementById("hamburger");
+                var nav = document.getElementById("nav");
+                var close = document.getElementById("close");
+
+                hamburger.addEventListener("click", function(e) { 
+                    nav.setAttribute("class", "nav-active"); 
+                });
+
+                close.addEventListener("click", function(e) { 
+                    nav.removeAttribute("class"); 
+                });
+            });
+        </script>
     </head>
     <body>
         <header>
-            <div class="content hightFill flexRowAlignLeft">
+            <div class="content heightFill flexCenter">
                 <a href="/place_article" style="padding-top: 10px;">
                     <img src="/logo2.png" class="header-logo"/>
                 </a>
             </div>
+            <div class="sp-hamburger" id="hamburger">
+                <img src="/hamburger.png" width="25px" hight="14px"/>
+            </div>
         </header>
+
+        <nav id="nav">
+
+            <div class="content heightFill pc-navInner">
+                <a href="/place_article" class="pc-navItem">
+                    <div class="flexCenter heightFill">
+                    Home
+                    </div>
+                </a>
+                <span class="pc-navItem dropdown">
+                    <span class="dropdown-title flexCenter heightFill">Areas</span>
+                    <div class="dropdown-content">
+                        <a href="/prefecture/Tokyo" class="dropdown-item">Tokyo</a>
+                        <a href="/prefecture/Chiba" class="dropdown-item">Chiba</a>
+                        <a href="/prefecture/Kanagawa" class="dropdown-item">Kanagawa</a>
+                    </div>
+                </span>
+            </div>
+
+            <div class="sp-navInner">
+                <div class="sp-nav-closeButton" id="close">
+                    <img src="/close.png" width="20px" height="20px"/>
+                </div>
+                <a class="sp-nav-link" href="/place_article">Home</a>
+                <span class="sp-nav-title">Area</span>
+                <a href="/prefecture/Tokyo" class="sp-nav-link sp-nav-indent">Tokyo</a>
+                <a href="/prefecture/Chiba" class="sp-nav-link sp-nav-indent">Chiba</a>
+                <a href="/prefecture/Kanagawa" class="sp-nav-link sp-nav-indent">Kanagawa</a>
+            </div>
+
+        </nav>
+        
         <div class="content">
             <div th:replace="${breadCrumbs}"></div>
         </div>
-        <section class="content">
+
+        <section class="content" style="min-height: 100vh;">
             <div th:replace="${content}"></div>
         </section>
+        
+        <footer>
+            <div class="content heightFill flexColGravityBottom">
+                <small>Copyright &copy; Masato Yokota All Rights Reserved.</small>
+            </div>
+        </footer>
     </body>
 </html>

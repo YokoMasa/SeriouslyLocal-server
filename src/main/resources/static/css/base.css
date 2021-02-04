@@ -4,15 +4,28 @@
 }
 
 body {
+    position: relative;
     font-family: 'Noto Sans', sans-serif;
     margin: 0;
     width: 100vw;
 }
 
 header {
+    position: relative;
     width: 100vw;
     height: 60px;
+}
+
+nav {
+    width: 100vw;
+    height: 35px;
     border-bottom: 1px solid #ccc;
+}
+
+footer {
+    width: 100vw;
+    height: 30px;
+    background: #eee;
 }
 
 img {
@@ -105,6 +118,104 @@ a {
 
 .header-logo {
     height: 40px;
+}
+
+.pc-navItem {
+    display: inline-block;
+    min-width: 120px;
+    height: 100%;
+    text-align: center;
+    font-size: 11pt;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.pc-navItem:hover {
+    background: #ef0000;
+    color: white;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-title {
+    display: block;
+    height: 100%;
+}
+
+.dropdown-content {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+    top: -900px;
+    left: 0;
+    color: black;
+    background-color: white;
+    box-shadow: #ccc 0px 0px 3px;
+    min-width: 100%;
+    z-index: 1;
+    transition: opacity 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    top: 33px;
+    opacity: 1;
+    visibility: visible;
+}
+
+.dropdown-item {
+    text-decoration: none;
+    display: block;
+    padding: 7px 0;
+}
+
+.dropdown-item:hover {
+    background: #ef0000;
+    color: white;
+}
+
+.sp-hamburger {
+    display: none;
+    position: absolute;
+    right: 20px;
+    top: 0;
+    height: 100%;
+    align-items: center;
+}
+
+.sp-navInner {
+    display: none;
+    position: relative;
+    font-size: 13px;
+    padding: 10px;
+}
+
+.sp-nav-link {
+    display: block;
+    margin: 10px 0;
+}
+
+.sp-nav-title {
+    display: block;
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+.sp-nav-indent {
+    padding-left: 15px;
+}
+
+.sp-nav-closeButton {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    right: 0;
+    top: 0;
 }
 
 .content {
@@ -299,6 +410,43 @@ a {
 
 header {
     height: 45px;
+    border-bottom: 1px solid #ccc;
+}
+
+.sp-hamburger {
+    display: flex;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    right: -220px;
+    height: 100vh;
+    width: 200px;
+    background: white;
+    box-shadow: #777 -1px 2px 5px;
+    z-index: 2;
+    transition: right 0.3s;
+}
+
+.nav-active {
+    right: 0;
+}
+
+.pc-navInner {
+    display: none;
+}
+
+.sp-navInner {
+    display: block;
+}
+
+footer {
+    height: 20px;
+}
+
+small {
+    font-size: 7pt;
 }
 
 .spOnly {

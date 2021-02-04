@@ -34,7 +34,7 @@
                     </select>
                 </div>
 
-                <div v-if="noArticle()">Currently there are no article about this category</div>
+                <div v-if="noArticle()" style="display: none;">Currently there are no article about this category</div>
 
                 <div style="position: relative;">
                     <transition name="fade">
@@ -61,7 +61,7 @@
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
             <script th:inline="javascript">
-                window.onload = function() {
+                window.addEventListener("load", function() {
 
                     var prefecture = /*[[${prefectureInfo.name}]]*/ "Tokyo";
                     var params = new URLSearchParams(new URL(window.location).search);
@@ -113,7 +113,7 @@
                             }
                         }
                     });
-                }
+                });
             </script>
         </div>
     </body>
