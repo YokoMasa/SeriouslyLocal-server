@@ -26,7 +26,7 @@ public class HtmlUtil {
             return "";
         }
 
-        return "<iframe width=\"100%\" height=\"400px\" frameborder=\"0\" style=\"border: 0;\" src=\"https://www.google.com/maps/embed/v1/place?key=" + apiKey +
+        return "<iframe loading=\"lazy\" width=\"100%\" height=\"400px\" frameborder=\"0\" style=\"border: 0;\" src=\"https://www.google.com/maps/embed/v1/place?key=" + apiKey +
                     "&q=" + q + "\" allowfullscreen></iframe>";
     }
 

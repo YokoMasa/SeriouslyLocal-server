@@ -275,7 +275,7 @@ a {
 }
 
 .articleList-el {
-    height: 100px;
+    height: 120px;
     margin-bottom: 10px;
     text-decoration: none;
     overflow: hidden;
@@ -283,8 +283,8 @@ a {
 
 .articleList-el-image {
     height: 100%;
-    min-width: 160px;
-    width: 160px;
+    min-width: 180px;
+    width: 180px;
     margin-right: 10px;
     object-fit: cover;
 }
@@ -347,6 +347,19 @@ a {
 
 .article iframe {
     border-radius: 0;
+}
+
+.article-tag {
+    display: inline-block;
+    background: #ef0000;
+    padding: 1px 15px;
+    margin-right: 8px;
+    font-size: 11pt;
+    color: white;
+}
+
+.article-tag-wrapper {
+    margin-top: 10px;
 }
 
 .credit {
@@ -467,13 +480,13 @@ small {
 }
 
 .articleList-el {
-    height: 80px;
+    height: 85px;
 }
 
 .articleList-el-image {
-    height: 80px;
-    min-width: 80px;
-    width: 80px;
+    height: 85px;
+    min-width: 85px;
+    width: 85px;
 }
 
 .articleList-el-title {
@@ -494,6 +507,16 @@ small {
     width: 100%;
     border-bottom: 1px solid #ccc;
     margin-bottom: 40px;
+}
+
+.article-tag {
+    padding: 1px 8px;
+    margin-right: 6px;
+    font-size: 9pt;
+}
+
+.article-tag-wrapper {
+    margin-top: 3px;
 }
 
 .article-title h1 {

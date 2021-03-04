@@ -16,6 +16,11 @@
                     <img th:src="${article.thumbnail.thumbnailUrl}" class="roundBorder articleList-el-image"/>
 
                     <div class="heightFill" style="position: relative;">
+                        <div>
+                            <span class="article-tag" th:each="tag: ${article.tags}" th:text="${tag.name}"> 
+                            </span>
+                        </div>
+                        
                         <h2 th:text="${article.title}" class="articleList-el-title"></h2>
 
                         <div class="articleList-el-metadata">

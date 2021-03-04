@@ -141,7 +141,13 @@ public class PlaceArticleServiceImpl implements PlaceArticleService {
             pageable = PageRequest.of(0, 25, CREATED_AT_SORT);
         }
 
-        return repository.findAll(spec, pageable);
+        Page<PlaceArticle> articles = repository.findAll(spec, pageable);
+            
+        articles.forEach(article -> { 
+            article.setContent(null);
+            article.setRawContent(null); 
+        });
+        return articles;
     }
     
 }
