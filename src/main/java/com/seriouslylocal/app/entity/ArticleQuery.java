@@ -8,6 +8,7 @@ public class ArticleQuery {
     private int status;
     private String prefecture;
     private Category category;
+    private Tag tag;
     private int pageSize;
     private int page;
 
@@ -49,6 +50,14 @@ public class ArticleQuery {
 
     public void setPage(int page) {
         this.page = page;
+    }
+
+    public Tag getTag() {
+        return this.tag;
+    }
+
+    public void setTag(Tag tag) {
+        this.tag = tag;
     }
 
     @Override

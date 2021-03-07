@@ -134,6 +134,10 @@ public class PlaceArticleServiceImpl implements PlaceArticleService {
             spec = spec.and(PlaceArticleSpecs.isInPrefecture(q.getPrefecture()));
         }
 
+        if (q.getTag() != null) {
+            spec = spec.and(PlaceArticleSpecs.hasTag(q.getTag()));
+        }
+
         Pageable pageable = null;
         if (q.getPageSize() != 0) {
             pageable = PageRequest.of(q.getPage(), q.getPageSize(), CREATED_AT_SORT);

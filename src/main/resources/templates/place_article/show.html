@@ -32,8 +32,8 @@
                     <span th:utext="${thumbnailCredit}"></span>
 
                     <div class="article-tag-wrapper">
-                        <span class="article-tag" th:each="tag: ${article.tags}" th:text="${tag.name}"> 
-                        </span>
+                        <a th:href="@{/place_article/tag/{name}(name=${tag.name})}" class="article-tag" th:each="tag: ${article.tags}" th:text="${tag.name}"> 
+                        </a>
                     </div>
 
                     <div class="article-title">

@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import com.seriouslylocal.app.common.HtmlUtil;
+import com.seriouslylocal.app.entity.ArticleQuery;
 import com.seriouslylocal.app.entity.Category;
 import com.seriouslylocal.app.entity.PlaceArticle;
+import com.seriouslylocal.app.entity.Tag;
 import com.seriouslylocal.app.repository.projection.ArticleMetadata;
 import com.seriouslylocal.app.service.ArticlePreviewService;
 import com.seriouslylocal.app.service.CategoryService;
 import com.seriouslylocal.app.service.PlaceArticleService;
+import com.seriouslylocal.app.service.TagService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +35,9 @@ public class PlaceArticleController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @Autowired
+    private TagService tagService;
     
     @GetMapping
     public String list(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
@@ -48,6 +54,21 @@ public class PlaceArticleController {
             model.addAttribute("category", category);
             model.addAttribute("articles", articles);
             return "place_article/category_index";
+        } else {
+            return "forward:/404.html";
+        }
+    }
+
+    @GetMapping("/tag/{name}")
+    public String listByTag(@RequestParam(name = "page", defaultValue = "0") int page, @PathVariable("name") String tagName, Model model) {
+        Optional<Tag> op = tagService.findTagByName(tagName);
+        if (op.isPresent()) {
+            Tag tag = op.get();
+            ArticleQuery q = new ArticleQuery();
+            q.setTag(tag);
+            model.addAttribute("tag", tag);
+            model.addAttribute("articles", service.list(q));
+            return "place_article/tag_index";
         } else {
             return "forward:/404.html";
         }

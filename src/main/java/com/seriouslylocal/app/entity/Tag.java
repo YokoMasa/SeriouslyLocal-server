@@ -38,4 +38,14 @@ public class Tag {
             "}";
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Tag) {
+            Tag t = (Tag) o;
+            return t.getName().equals(name);
+        } else {
+            return false;
+        }
+    }
+
 }
