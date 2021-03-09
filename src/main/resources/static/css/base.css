@@ -343,6 +343,7 @@ a {
 
 .article img {
     border-radius: 0;
+    max-height: 500px;
 }
 
 .article iframe {
