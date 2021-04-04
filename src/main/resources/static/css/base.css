@@ -350,6 +350,13 @@ a {
     border-radius: 0;
 }
 
+.article blockquote {
+    margin: 14px 0;
+    border-left: 4px solid #e5e5e5;
+    padding: 0 16px;
+    color: #999;
+}
+
 .article-tag {
     display: inline-block;
     background: #ef0000;
